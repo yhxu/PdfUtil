@@ -20,7 +20,7 @@ import java.util.Calendar;
 
 public class PDFUtils {
     public static void main(String[] args) {
-        String path = "D:/yxdir/徐云昊其他费.pdf";
+        String path = "D:/yxdir/test.pdf";
 
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File("D:/yxdir/abc.pdf")));
