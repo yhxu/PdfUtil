@@ -72,7 +72,7 @@ public class PDFUtils {
     }
 
     /**
-     * 设置图片水印
+     * 设置图片水印 使用ice框架，商用请官网购买http://www.icesoft.org/java/home.jsf
      *
      * @param descFile 目标文件
      * @param srcFile 源文件
