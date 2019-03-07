@@ -166,7 +166,11 @@ public class GenPDF {
             table.addCell(createCell((i % 2 == 0) ? "男" : "女", false));
             table.addCell(createCell("地址" + i, false));
         }
-        document.add(table);
+        close(table);
+    }
+    public void close(PdfPTable table) throws Exception {
+        if(null != table)
+            document.add(table);
         document.close();
     }
     public void writePdf(String title, String filePath, String createTime, String authorName) throws Exception{
@@ -192,7 +196,7 @@ public class GenPDF {
         document.add(new Paragraph("\n"));
         document.add(new Paragraph("Some more text on the 胜多负少的身份的分公司的风格发的电饭锅的分公司的分公司的的分公司电饭锅是的分公司的风格的分公司的分公司的复合弓好几顿饭发的寡鹄单凫过好地方风格和的发干活的风格和发干活的风格和地方过电饭锅好地方干活的风格和电饭锅好地方干活负少的身份的分公司的风格发的电饭锅的分公司的分公司的的分公司电饭锅是的分公司的风格的分公司的分公司的复合弓好几顿饭发的寡鹄单凫过好地方风格和的发干活的风格和发干活的风格和地方过电饭锅好地方干活的风格和电饭锅好地方干活负少的身份的分公司的风格发的电饭锅的分公司的分公司的的分公司电饭锅是的分公司的风格的分公司的分公司的复合弓好几顿饭发的寡鹄单凫过好地方风格和的发干活的风格和发干活的风格和地方过电饭锅好地方干活的风格和电饭锅好地方干活的风格和符合斯蒂夫 first page with different color andsdfsadfffffffffffffffffffffffffff font type.", keyfont));
         //5.关闭文档
-        document.close();
+        close(null);
     }
     public static void main(String[] args) throws Exception {
         getInstance("D:/yxdir/test.pdf").generatePDF();
