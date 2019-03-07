@@ -151,23 +151,6 @@ public class GenPDF {
         return table;
     }
 
-    public void generatePDF() throws Exception{
-        PdfPTable table = createTable(4);
-        table.addCell(createKeyCell("学生信息列表：", Element.ALIGN_LEFT, 4, false));
-
-        table.addCell(createKeyCell("姓名", Element.ALIGN_CENTER));
-        table.addCell(createKeyCell("年龄", Element.ALIGN_CENTER));
-        table.addCell(createKeyCell("性别", Element.ALIGN_CENTER));
-        table.addCell(createKeyCell("住址", Element.ALIGN_CENTER));
-
-        for(int i = 0; i < 5; i++){
-            table.addCell(createCell("姓名" + i, false));
-            table.addCell(createCell(i + 15 + "", false));
-            table.addCell(createCell((i % 2 == 0) ? "男" : "女", false));
-            table.addCell(createCell("地址" + i, false));
-        }
-        close(table);
-    }
     public void close(PdfPTable table) throws Exception {
         if(null != table)
             document.add(table);
@@ -199,6 +182,41 @@ public class GenPDF {
         close(null);
     }
     public static void main(String[] args) throws Exception {
-        getInstance("D:/yxdir/test.pdf").generatePDF();
+        Thread thread = null;
+        for(int i=0;i<5;i++){
+            thread = new test();
+            thread.start();
+        }
+
+    }
+    public static class test extends Thread{
+        @Override
+        public void run() {
+            try {
+                GenPDF.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public static void run() throws Exception{
+        long id = Thread.currentThread().getId();
+        System.out.println(id +"开始");
+        GenPDF genPDFins = getInstance("D:/yxdir/test"+ id +".pdf");
+        PdfPTable table = genPDFins.createTable(4);
+        table.addCell(genPDFins.createKeyCell("学生信息列表：", Element.ALIGN_LEFT, 4, false));
+        table.addCell(genPDFins.createKeyCell("姓名："));
+        table.addCell(genPDFins.createKeyCell("年龄："));
+        table.addCell(genPDFins.createKeyCell("性别："));
+        table.addCell(genPDFins.createKeyCell("住址："));
+        Thread.sleep(10000);
+        for(int i=0; i<5; i++){
+            table.addCell(genPDFins.createCell("姓名"+i, false));
+            table.addCell(genPDFins.createCell(""+(i+15), false));
+            table.addCell(genPDFins.createCell((i%2==0)?"男":"女", false));
+            table.addCell(genPDFins.createCell("地址" + i, false));
+        }
+        genPDFins.close(table);
+        System.out.println(id +"结束");
     }
 }
